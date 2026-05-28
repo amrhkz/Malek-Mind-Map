@@ -6,9 +6,11 @@ const {
   getProfile,
   logout,
   login,
+  register,
 } = require("../controllers/authController");
 
 router.post("/send-code", sendCode);
+router.post("/register", register);
 router.post("/login", login);
 router.post("/verify-code", verifyCode);
 router.get("/profile", getProfile);
