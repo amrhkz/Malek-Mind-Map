@@ -1,0 +1,16 @@
+.habits {
+  display: flex;
+  gap: 12px;
+}
+.habit {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  width: 124px;
+  height: 48px;
+  border-radius: 6px;
+  color: var(--second);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

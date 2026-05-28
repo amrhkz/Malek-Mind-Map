@@ -1,0 +1,108 @@
+.bank-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.bank-tab .bank-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bank-tab .bank-controls .filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--second);
+}
+.bank-tab .bank-controls .filters .filter-item {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--border);
+  transition: var(--tran-04);
+}
+.bank-tab .bank-controls .filters .filter-item.active {
+  background: var(--primary);
+  color: var(--text);
+}
+.bank-tab .bank-controls .filters .filter-item:hover {
+  background: var(--hover);
+}
+.bank-tab .bank-controls .new-bank {
+  background: var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--tran-04);
+}
+.bank-tab .bank-controls .new-bank:hover {
+  background: var(--hover);
+}
+.bank-tab .bank-controls .modal-menu > form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bank-tab .bank-controls .modal-menu > form > input {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
+}
+.bank-tab .bank-controls .modal-menu > form > button {
+  background: var(--border);
+  height: 42px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--tran-04);
+}
+.bank-tab .bank-controls .modal-menu > form > button:hover {
+  opacity: 0.8;
+}
+.bank-tab .bank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bank-tab .bank-list .bank-item {
+  background: var(--border);
+  padding: 24px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
+.bank-tab .bank-list .bank-item > .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+}
+.bank-tab .bank-list .bank-item > .card-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 6;
+}
+.bank-tab .bank-list .bank-item > .balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+}
+.bank-tab .bank-list .bank-item > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  transition: var(--tran-03);
+}
+.bank-tab .bank-list .bank-item > button:hover {
+  color: var(--sell);
+}

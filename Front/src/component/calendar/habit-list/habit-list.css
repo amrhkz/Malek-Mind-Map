@@ -1,0 +1,10 @@
+.no-habit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--second);
+  height: 175px;
+  font-size: 12px;
+}

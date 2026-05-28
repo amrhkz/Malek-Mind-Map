@@ -1,0 +1,120 @@
+.timer-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.timer-tab .timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.timer-tab .timer-controls .filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--second);
+}
+.timer-tab .timer-controls .filters .filter-item {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--border);
+  transition: var(--tran-04);
+}
+.timer-tab .timer-controls .filters .filter-item.active {
+  background: var(--primary);
+  color: var(--text);
+}
+.timer-tab .timer-controls .filters .filter-item:hover {
+  background: var(--hover);
+}
+.timer-tab .timer-controls .new-timer {
+  background: var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--tran-04);
+}
+.timer-tab .timer-controls .new-timer:hover {
+  background: var(--hover);
+}
+.timer-tab .timer-controls .new-timer-menu {
+  width: 100%;
+}
+.timer-tab .timer-controls .new-timer-menu > form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.timer-tab .timer-controls .new-timer-menu > form > input {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
+}
+.timer-tab .timer-controls .new-timer-menu > form > button {
+  background: var(--border);
+  height: 42px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--tran-04);
+}
+.timer-tab .timer-controls .new-timer-menu > form > button:hover {
+  opacity: 0.8;
+}
+.timer-tab .timer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.timer-tab .timer-list .timer-item {
+  background: var(--border);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+  padding: 24px;
+}
+.timer-tab .timer-list .timer-item > img {
+  border-radius: 0;
+  width: 100px;
+}
+.update-timer {
+  display: flex;
+  flex-direction: column;
+}
+.update-timer > form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.update-timer > form > input {
+  padding: 6px 12px;
+  border-radius: 3px;
+  background: var(--border);
+}
+.update-timer > form > .buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.update-timer > form > .buttons > button {
+  width: 100%;
+  background: var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--tran-03);
+}
+.update-timer > form > .buttons > button:hover {
+  opacity: 0.8;
+}
+.update-timer > form > .buttons > .delete-btn {
+  background: var(--sell);
+}

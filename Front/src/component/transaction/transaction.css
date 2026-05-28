@@ -1,0 +1,19 @@
+.transaction-item {
+  background: var(--card);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  width: 350px;
+}
+.transaction-item > div > .type {
+  font-size: 20px;
+  font-weight: 700;
+}
+.transaction-item > div > .desc{
+  font-size: 14px;
+  color: var(--second);
+}
