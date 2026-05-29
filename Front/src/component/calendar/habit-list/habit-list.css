@@ -8,3 +8,31 @@
   height: 175px;
   font-size: 12px;
 }
+
+.multi-habit-item {
+  justify-content: space-between !important;
+}
+
+.multi-habit-item .title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.multi-check-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.multi-check-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
