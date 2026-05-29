@@ -137,55 +137,30 @@ const HabitList = ({ habits, day, onHabitUpdate }) => {
   return (
     <>
       {filteredHabits.length > 0 ? (
-        filteredHabits.map((habit) => {
+        filteredHabits.map((habit) =>
+          Array.from({
+            length: habit.habitType === "multi" ? habit.count || 1 : 1,
+          }).map((_, idx) => {
           const isMulti = habit.habitType === "multi";
-
-          if (isMulti) {
-            return (
-              <div key={habit._id} className="habit-item multi-habit-item">
-                <div className="title">{habit.title}</div>
-                <div className="multi-check-list">
-                  {Array.from({ length: habit.count || 1 }).map((_, idx) => {
-                    const isCompleted = habit.multiDates.some(
-                      (entry) =>
-                        entry.index === idx &&
-                        isSameDay(new Date(entry.date), day)
-                    );
-
-                    return (
-                      <button
-                        key={`${habit._id}-${idx}`}
-                        type="button"
-                        className="multi-check-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleToggleHabit(habit, idx);
-                        }}
-                      >
-                        {renderCheckBox(isCompleted)}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          }
-
-          const isCompleted = habit.dates.some((date) =>
-            isSameDay(new Date(date), day)
-          );
+          const isCompleted = isMulti
+            ? habit.multiDates.some(
+                (entry) =>
+                  entry.index === idx && isSameDay(new Date(entry.date), day)
+              )
+            : habit.dates.some((date) => isSameDay(new Date(date), day));
 
           return (
             <div
-              key={habit._id}
+              key={`${habit._id}-${idx}`}
               className="habit-item"
-              onClick={() => handleToggleHabit(habit, 0)}
+              onClick={() => handleToggleHabit(habit, idx)}
             >
               {renderCheckBox(isCompleted)}
               <div className="title">{habit.title}</div>
             </div>
           );
-        })
+          })
+        )
       ) : (
         <div className="no-habit">
           <svg
