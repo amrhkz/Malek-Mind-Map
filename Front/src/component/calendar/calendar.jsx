@@ -36,6 +36,14 @@ export default function Calendar() {
     getHabit().then(setHabits).catch(console.error);
   }, []);
 
+  const handleHabitUpdate = (habitId, updates) => {
+    setHabits((prev) =>
+      prev.map((habit) =>
+        habit._id === habitId ? { ...habit, ...updates } : habit
+      )
+    );
+  };
+
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
 
@@ -85,7 +93,11 @@ export default function Calendar() {
                 <div className="habit-card">
                   <div className="title">Daily Habits</div>
                   <div className="habit-list">
-                    <HabitList habits={habits} day={day} />
+                    <HabitList
+                      habits={habits}
+                      day={day}
+                      onHabitUpdate={handleHabitUpdate}
+                    />
                   </div>
                 </div>
               )}

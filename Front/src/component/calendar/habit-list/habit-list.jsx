@@ -21,7 +21,7 @@ const UpdateHabit = async (id, body) => {
   }
 };
 
-const HabitList = ({ habits, day }) => {
+const HabitList = ({ habits, day, onHabitUpdate }) => {
   const { showToast } = useToast();
   const [updatedHabits, setUpdatedHabits] = useState([]);
 
@@ -80,25 +80,31 @@ const HabitList = ({ habits, day }) => {
           )
         : [...multiDatesArray, { index, date: day.toISOString() }];
 
-      await UpdateHabit(habit._id, { multiDates: updatedMultiDates });
+      const savedHabit = await UpdateHabit(habit._id, {
+        multiDates: updatedMultiDates,
+      });
+      const nextMultiDates = savedHabit?.multiDates ?? updatedMultiDates;
 
       setUpdatedHabits((prev) =>
         prev.map((h) =>
-          h._id === habit._id ? { ...h, multiDates: updatedMultiDates } : h
+          h._id === habit._id ? { ...h, multiDates: nextMultiDates } : h
         )
       );
+      onHabitUpdate?.(habit._id, { multiDates: nextMultiDates });
     } else {
       const updatedDates = isCompleted
         ? datesArray.filter((date) => !isSameDay(new Date(date), day))
         : [...datesArray, day.toISOString()];
 
-      await UpdateHabit(habit._id, { dates: updatedDates });
+      const savedHabit = await UpdateHabit(habit._id, { dates: updatedDates });
+      const nextDates = savedHabit?.dates ?? updatedDates;
 
       setUpdatedHabits((prev) =>
         prev.map((h) =>
-          h._id === habit._id ? { ...h, dates: updatedDates } : h
+          h._id === habit._id ? { ...h, dates: nextDates } : h
         )
       );
+      onHabitUpdate?.(habit._id, { dates: nextDates });
     }
 
     if (!isCompleted) {
