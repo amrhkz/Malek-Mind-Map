@@ -67,14 +67,11 @@ function Banner() {
     <div className="banner">
       <div className="banner-bg">
         <img src={banner || "./img/banner-3.jpg"} alt="banner" />
-
-        {/* Action Buttons (Top Right) */}
         <div className="banner-actions">
           <button className="action-btn notification-btn">
             <i className="bx bx-bell bx-sm"></i>
             <span className="badge">20</span>
           </button>
-
           <Modal>
             <ModalToggle>
               <button
@@ -99,8 +96,6 @@ function Banner() {
             </ModalMenu>
           </Modal>
         </div>
-
-        {/* Profile Section (Avatar + Info) */}
         <div className="profile-wrapper">
           <Modal>
             <ModalToggle>
@@ -128,7 +123,6 @@ function Banner() {
               </div>
             </ModalMenu>
           </Modal>
-
           <div className="profile-info">
             <span className="welcome-text">Welcome back,</span>
             <div className="name-wrapper">
