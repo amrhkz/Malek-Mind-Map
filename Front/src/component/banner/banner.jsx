@@ -67,52 +67,80 @@ function Banner() {
     <div className="banner">
       <div className="banner-bg">
         <img src={banner || "./img/banner-3.jpg"} alt="banner" />
-        <Modal>
-          <ModalToggle>
-            <div
-              className="banner-logo"
-              onClick={() => setUploadType("avatar")}
-            >
-              <img src={avatar || "./img/banner-logo.jpg"} alt="avatar" />
-              <div className="select-img">
-                <i className="bx bx-camera bx-sm"></i>
+
+        {/* Action Buttons (Top Right) */}
+        <div className="banner-actions">
+          <button className="action-btn notification-btn">
+            <i className="bx bx-bell bx-sm"></i>
+            <span className="badge">20</span>
+          </button>
+
+          <Modal>
+            <ModalToggle>
+              <button
+                className="action-btn"
+                onClick={() => setUploadType("banner")}
+              >
+                <i className="bx bx-dots-horizontal-rounded bx-sm"></i>
+              </button>
+            </ModalToggle>
+            <ModalMenu>
+              <div className="upload-img">
+                <form onSubmit={handleUpload}>
+                  <div className="title">Upload Your Banner</div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                  <button type="submit">Upload</button>
+                </form>
               </div>
+            </ModalMenu>
+          </Modal>
+        </div>
+
+        {/* Profile Section (Avatar + Info) */}
+        <div className="profile-wrapper">
+          <Modal>
+            <ModalToggle>
+              <div
+                className="banner-logo"
+                onClick={() => setUploadType("avatar")}
+              >
+                <img src={avatar || "./img/banner-logo.jpg"} alt="avatar" />
+                <div className="select-img">
+                  <i className="bx bx-camera bx-sm"></i>
+                </div>
+              </div>
+            </ModalToggle>
+            <ModalMenu>
+              <div className="upload-img">
+                <form onSubmit={handleUpload}>
+                  <div className="title">Upload Your Avatar</div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                  <button type="submit">Upload</button>
+                </form>
+              </div>
+            </ModalMenu>
+          </Modal>
+
+          <div className="profile-info">
+            <span className="welcome-text">Welcome back,</span>
+            <div className="name-wrapper">
+              <h1 className="user-name">Malek</h1>
+              <span className="pro-badge">Pro</span>
             </div>
-          </ModalToggle>
-          <ModalMenu>
-            <div className="upload-img">
-              <form onSubmit={handleUpload}>
-                <div className="title">Upload Your Avatar</div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-                <button type="submit">Upload</button>
-              </form>
+            <div className="user-motto">
+              Focus <span className="diamond">♦</span> Discipline{" "}
+              <span className="diamond">♦</span> Freedom
             </div>
-          </ModalMenu>
-        </Modal>
-        <Modal>
-          <ModalToggle>
-            <div className="select-img" onClick={() => setUploadType("banner")}>
-              <i className="bx bx-dots-horizontal-rounded bx-md"></i>
-            </div>
-          </ModalToggle>
-          <ModalMenu>
-            <div className="upload-img">
-              <form onSubmit={handleUpload}>
-                <div className="title">Upload Your Banner</div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-                <button type="submit">Upload</button>
-              </form>
-            </div>
-          </ModalMenu>
-        </Modal>
+          </div>
+        </div>
       </div>
     </div>
   );
