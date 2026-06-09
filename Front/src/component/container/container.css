@@ -1,5 +1,6 @@
 .container-x {
   position: absolute;
   right: 0;
+  width: 100%;
   max-width: calc(100% - 75px);
 }
