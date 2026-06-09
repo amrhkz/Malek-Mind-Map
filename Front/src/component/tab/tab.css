@@ -1,12 +1,21 @@
 .tabs {
   display: flex;
+  justify-content: center;
+  width: fit-content;
   border-bottom: 2px solid var(--border);
   margin-bottom: 16px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 50px;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tab {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 12px 20px;
   cursor: pointer;
@@ -17,7 +26,8 @@
 
 .tab.active {
   color: var(--text);
-  border-bottom: 2px solid var(--text);
+  background: var(--second);
+  border-radius: 50px;
 }
 
 .tab:hover {

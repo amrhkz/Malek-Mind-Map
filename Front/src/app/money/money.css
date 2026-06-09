@@ -1,33 +1,91 @@
-.finance-task-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 24px;
-}
-.finance-task {
-  direction: rtl;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.transaction-section-wrapper {
   background: var(--card);
-  padding: 12px;
-  border-radius: 6px;
-  color: var(--second);
-  max-width: 200px;
+  border-radius: 18px;
+  padding: 20px;
   box-shadow: var(--shadow);
+  width: 100%;
+  min-height: 100%;
 }
-.finance-task .title {
-  font-size: 18px;
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
-.finance-task .price {
-  font-size: 14px;
-  font-family: "IranSansNum";
+
+.transaction-title-main {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text);
 }
+
 .transaction-list {
   display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.add-transaction-btn {
+  display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 24px;
+  gap: 8px;
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 10px 16px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.add-transaction-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.empty-state {
   width: 100%;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--second);
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 14px;
+}
+
+.finance-stat-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.3s;
+}
+
+.finance-stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.finance-stat-card i {
+  font-size: 34px;
+}
+
+.finance-stat-card h3 {
+  font-family: "IranSansNum";
+  margin-top: 6px;
+  font-weight: bold;
 }

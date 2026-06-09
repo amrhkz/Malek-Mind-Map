@@ -11,22 +11,21 @@ function Banner() {
   const [userId, setUserId] = useState();
 
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await fetch("http://localhost:4000/api/user/me", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      setUserId(data._id);
-      if (data.avatar) setAvatar(data.avatar);
-      if (data.banner) setBanner(data.banner);
-    } catch (err) {
-      console.error("Error fetching user:", err);
-    }
-  };
-  fetchUser();
-}, []);
-
+    const fetchUser = async () => {
+      try {
+        const res = await fetch("http://localhost:4000/api/user/me", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        setUserId(data._id);
+        if (data.avatar) setAvatar(data.avatar);
+        if (data.banner) setBanner(data.banner);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -67,7 +66,33 @@ function Banner() {
   return (
     <div className="banner">
       <div className="banner-bg">
-        <img src={banner || "./img/banner-2.jpg"} alt="banner" />
+        <img src={banner || "./img/banner-3.jpg"} alt="banner" />
+        <Modal>
+          <ModalToggle>
+            <div
+              className="banner-logo"
+              onClick={() => setUploadType("avatar")}
+            >
+              <img src={avatar || "./img/banner-logo.jpg"} alt="avatar" />
+              <div className="select-img">
+                <i className="bx bx-camera bx-sm"></i>
+              </div>
+            </div>
+          </ModalToggle>
+          <ModalMenu>
+            <div className="upload-img">
+              <form onSubmit={handleUpload}>
+                <div className="title">Upload Your Avatar</div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+                <button type="submit">Upload</button>
+              </form>
+            </div>
+          </ModalMenu>
+        </Modal>
         <Modal>
           <ModalToggle>
             <div className="select-img" onClick={() => setUploadType("banner")}>
@@ -89,30 +114,6 @@ function Banner() {
           </ModalMenu>
         </Modal>
       </div>
-
-      <Modal>
-        <ModalToggle>
-          <div className="banner-logo" onClick={() => setUploadType("avatar")}>
-            <img src={avatar || "./img/banner-logo.jpg"} alt="avatar" />
-            <div className="select-img">
-              <i className="bx bx-camera bx-sm"></i>
-            </div>
-          </div>
-        </ModalToggle>
-        <ModalMenu>
-          <div className="upload-img">
-            <form onSubmit={handleUpload}>
-              <div className="title">Upload Your Avatar</div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-              <button type="submit">Upload</button>
-            </form>
-          </div>
-        </ModalMenu>
-      </Modal>
     </div>
   );
 }

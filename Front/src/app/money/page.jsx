@@ -2,18 +2,14 @@
 import React, { useEffect, useState } from "react";
 import "@/app/money/money.css";
 import Container from "@/component/container/container";
-import MoneyCell from "@/component/money-cell/money-cell";
-import Income from "@/component/money-cell/income/income";
 import ShoppingList from "@/component/shopping-list/shopping-list";
-import Carousel from "@/component/carousel/carousel";
 import { Tab, TabItem, TabMenu, TabPanel } from "@/component/tab/tab";
 import BankCard from "@/component/bank-card/bank-card";
-import ShoppingTab from "@/component/shopping-tab/shopping-tab";
-import ShoppingSection from "@/component/shopping-section/shopping-section";
-import Transaction from "@/component/transaction/transaction";
+import FinancialDashboard from "@/component/debts/debts";
+import Dashboard from "@/component/OverviewChart/OverviewChart";
+import CardsDashboard from "@/component/card-tab/card-tab";
 
 const page = () => {
-  const [moneys, setMoneys] = useState([]);
   const [banks, setBanks] = useState([]);
   const [transactions, setTransactions] = useState([]);
 
@@ -33,6 +29,15 @@ const page = () => {
     };
     fetchTransactions();
   }, []);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [stats, setStats] = useState({
+    totalBalance: 0,
+    monthlyIncome: 0,
+    monthlyExpense: 0,
+    savings: 0,
+  });
 
   useEffect(() => {
     const fetchMoneys = async () => {
@@ -68,13 +73,43 @@ const page = () => {
     fetchBanks();
   }, []);
 
+  useEffect(() => {
+    const now = new Date();
+
+    const monthlyTransactions = transactions.filter((t) => {
+      const date = new Date(t.transactionDate);
+
+      return (
+        date.getMonth() === now.getMonth() &&
+        date.getFullYear() === now.getFullYear()
+      );
+    });
+
+    const monthlyIncome = monthlyTransactions
+      .filter((t) => t.type === "income")
+      .reduce((sum, t) => sum + t.amount, 0);
+
+    const monthlyExpense = monthlyTransactions
+      .filter((t) => t.type === "expense")
+      .reduce((sum, t) => sum + t.amount, 0);
+
+    const totalBalance = banks.reduce((sum, bank) => sum + bank.balance, 0);
+
+    setStats({
+      totalBalance,
+      monthlyIncome,
+      monthlyExpense,
+      savings: monthlyIncome - monthlyExpense,
+    });
+  }, [transactions, banks]);
+
   return (
     <>
       <Container>
         <Tab>
           <TabMenu defaultActive={0}>
             <TabItem index={0} icon="bx-dollar">
-              Money Management
+              Overview
             </TabItem>
             <TabItem index={1} icon="bx-cart">
               Shopping List
@@ -87,80 +122,16 @@ const page = () => {
             </TabItem>
           </TabMenu>
           <TabPanel index={0}>
-            <div className="flex p-[24px] w-full">
-              <Income />
-            </div>
-            <div className="flex p-[24px] w-full justify-between">
-              {moneys.map((money) => (
-                <div key={money._id} className="money-section">
-                  <MoneyCell
-                    title={money.title}
-                    prog={(
-                      (money.currentMoney / money.targetMoney) *
-                      100
-                    ).toFixed(2)}
-                    target={money.targetMoney}
-                    current={money.currentMoney}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="transaction-list">
-              {transactions.map((transaction) => {
-                return (
-                  <Transaction
-                    key={transaction._id}
-                    type={transaction.type}
-                    amount={transaction.amount}
-                    desc={transaction.description}
-                  />
-                );
-              })}
-            </div>
+            <Dashboard />
           </TabPanel>
           <TabPanel index={1}>
-            <ShoppingSection />
+            <ShoppingList />
           </TabPanel>
           <TabPanel index={2}>
-            {moneys.map((money) => (
-              <div key={money._id}>
-                {money.financeTask && money.financeTask.length > 0 && (
-                  <div className="finance-task-list">
-                    {money.financeTask
-                      .filter((task) => task.done !== "Done")
-                      .map((task, index) => (
-                        <div key={index} className="finance-task">
-                          <div className="title">{task.title}</div>
-                          <div className="price">
-                            {task.price.toLocaleString()} تومان
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            <FinancialDashboard />
           </TabPanel>
           <TabPanel index={3}>
-            <div className="flex justify-around">
-              {banks.length > 0 ? (
-                banks.map((bank) => (
-                  <BankCard
-                    key={bank._id}
-                    id={bank._id}
-                    bank={bank.bank}
-                    balance={bank.balance}
-                    cardNum={bank.cardNum}
-                    cvv={bank.cvv}
-                    expiry={bank.expiry}
-                    owner={bank.owner}
-                    iban={bank.iban}
-                  />
-                ))
-              ) : (
-                <p>Bank is loading ...</p>
-              )}
-            </div>
+            <CardsDashboard />
           </TabPanel>
         </Tab>
       </Container>
