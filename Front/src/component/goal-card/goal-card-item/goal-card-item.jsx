@@ -19,7 +19,10 @@ const GoalCardItem = ({ post }) => {
         </div>
       )}
       <div className="goal-image">
-        <img src={`/img/${post.image}`} alt={post.title} />
+        <img 
+          src={post.image ? `./img/${post.image}` : "./img/no-goal.jpg"} 
+          alt={post.title} 
+        />
         <div className="goal-order">{post.order}</div>
       </div>
       <div className="goal-card-content">
