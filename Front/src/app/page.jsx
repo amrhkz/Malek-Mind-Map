@@ -22,7 +22,7 @@ export default function Home() {
             <Suspense fallback={<MainGoalLoading />}>
               <GoalCard />
             </Suspense>
-            <TopHabits />
+            {/* <TopHabits /> */}
           </div>
           <div className="flex flex-col gap-[24px]">
             <TimerList />
