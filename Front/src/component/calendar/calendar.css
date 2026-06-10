@@ -163,7 +163,7 @@
   .habit-item
   .check-box.done
   .roundedSquareCheckbox {
-  fill: #2382e3;
+  fill: var(--primary);
   stroke: none;
 }
 .calendar-day
@@ -174,7 +174,7 @@
   .check-box
   .roundedCheck {
   display: none;
-  fill: white;
+  fill: var(--card);
   flex-shrink: 0;
 }
 .calendar-day
