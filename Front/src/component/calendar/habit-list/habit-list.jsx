@@ -5,10 +5,10 @@ import React, { useState, useEffect } from "react";
 import "./habit-list.css";
 
 // 📌 تابع آپدیت در Express
-const UpdateHabit = async (id, body) => {
+const ToggleHabitDate = async (id, body) => {
   try {
-    const res = await fetch(`http://localhost:4000/habits/${id}`, {
-      method: "PUT",
+    const res = await fetch(`http://localhost:4000/habits/${id}/toggle-date`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
       credentials: "include",
@@ -73,17 +73,21 @@ const HabitList = ({ habits, day, onHabitUpdate }) => {
       : datesArray.some((date) => isSameDay(new Date(date), day));
 
     if (isMulti) {
-      const updatedMultiDates = isCompleted
-        ? multiDatesArray.filter(
-            (entry) =>
-              !(entry.index === index && isSameDay(new Date(entry.date), day))
-          )
-        : [...multiDatesArray, { index, date: day.toISOString() }];
-
-      const savedHabit = await UpdateHabit(habit._id, {
-        multiDates: updatedMultiDates,
+      const savedHabit = await ToggleHabitDate(habit._id, {
+        date: day.toISOString(),
+        index,
+        habitType: habit.habitType,
       });
-      const nextMultiDates = savedHabit?.multiDates ?? updatedMultiDates;
+      const nextMultiDates =
+        savedHabit?.multiDates ??
+        (isCompleted
+          ? multiDatesArray.filter(
+              (entry) =>
+                !(
+                  entry.index === index && isSameDay(new Date(entry.date), day)
+                )
+            )
+          : [...multiDatesArray, { index, date: day.toISOString() }]);
 
       setUpdatedHabits((prev) =>
         prev.map((h) =>
@@ -92,12 +96,15 @@ const HabitList = ({ habits, day, onHabitUpdate }) => {
       );
       onHabitUpdate?.(habit._id, { multiDates: nextMultiDates });
     } else {
-      const updatedDates = isCompleted
-        ? datesArray.filter((date) => !isSameDay(new Date(date), day))
-        : [...datesArray, day.toISOString()];
-
-      const savedHabit = await UpdateHabit(habit._id, { dates: updatedDates });
-      const nextDates = savedHabit?.dates ?? updatedDates;
+      const savedHabit = await ToggleHabitDate(habit._id, {
+        date: day.toISOString(),
+        habitType: habit.habitType,
+      });
+      const nextDates =
+        savedHabit?.dates ??
+        (isCompleted
+          ? datesArray.filter((date) => !isSameDay(new Date(date), day))
+          : [...datesArray, day.toISOString()]);
 
       setUpdatedHabits((prev) =>
         prev.map((h) =>

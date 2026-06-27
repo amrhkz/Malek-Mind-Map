@@ -93,6 +93,61 @@ exports.updateHabit = async (req, res) => {
   }
 };
 
+exports.toggleHabitDate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date, index = 0, habitType } = req.body;
+
+    if (!date) return res.status(400).json({ error: "Date is required" });
+
+    const selectedDate = new Date(date);
+    if (Number.isNaN(selectedDate.getTime())) {
+      return res.status(400).json({ error: "Invalid date" });
+    }
+
+    const habit = await Habit.findOne({ _id: id, user: req.user.id });
+    if (!habit) return res.status(404).json({ error: "Habit not found" });
+
+    const startOfDay = new Date(selectedDate);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(selectedDate);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const isMulti = (habitType || habit.habitType) === "multi";
+
+    if (isMulti) {
+      const existingIndex = habit.multiDates.findIndex(
+        (entry) =>
+          entry.index === index &&
+          entry.date >= startOfDay &&
+          entry.date <= endOfDay
+      );
+
+      if (existingIndex >= 0) {
+        habit.multiDates.splice(existingIndex, 1);
+      } else {
+        habit.multiDates.push({ index, date: selectedDate });
+      }
+    } else {
+      const existingIndex = habit.dates.findIndex(
+        (entryDate) => entryDate >= startOfDay && entryDate <= endOfDay
+      );
+
+      if (existingIndex >= 0) {
+        habit.dates.splice(existingIndex, 1);
+      } else {
+        habit.dates.push(selectedDate);
+      }
+    }
+
+    const updatedHabit = await habit.save();
+    res.json(updatedHabit);
+  } catch (err) {
+    console.error("❌ Error toggling habit date:", err);
+    res.status(500).json({ error: "Failed to toggle Habit date" });
+  }
+};
+
 
 exports.deleteHabit = async (req, res) => {
   try {
