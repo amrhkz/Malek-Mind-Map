@@ -7,18 +7,11 @@ const taskinoSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
-    notes: {
-      type: String,
-      default: "",
-    },
-
     estimatedTime: {
       type: Number,
       required: true,
       min: 1,
     },
-
     completed: {
       type: Boolean,
       default: false,

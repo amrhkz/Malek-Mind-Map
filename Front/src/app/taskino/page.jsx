@@ -7,7 +7,6 @@ import Modal, { ModalMenu, ModalToggle } from "@/component/modal/modal";
 export default function Page() {
   const [taskino, setTaskino] = useState([]);
   const [title, setTitle] = useState("");
-  const [notes, setNotes] = useState("");
   const [estimatedTime, setEstimatedTime] = useState(15);
 
   useEffect(() => {
@@ -38,12 +37,10 @@ export default function Page() {
         },
         body: JSON.stringify({
           title,
-          notes,
           estimatedTime,
         }),
       });
       setTitle("");
-      setNotes("");
       setEstimatedTime(15);
       getTaskinos();
     } catch (err) {
@@ -57,7 +54,6 @@ export default function Page() {
         method: "PATCH",
         credentials: "include",
       });
-
       getTaskinos();
     } catch (err) {
       console.log(err);
@@ -81,22 +77,18 @@ export default function Page() {
       <div className="taskino">
         <div className="taskino-header">
           <div>
-            <h1>🧠 Taskino</h1>
+            <h1>Taskino</h1>
             <p>Empty your mind. Focus on doing.</p>
           </div>
-
           <Modal>
             <ModalToggle>
               <button className="new-task-btn">+ New Task</button>
             </ModalToggle>
-
             <ModalMenu width={520}>
               <div className="task-modal">
                 <h2>New Task</h2>
-
                 <div className="form-group">
                   <label>Task</label>
-
                   <input
                     type="text"
                     value={title}
@@ -104,10 +96,8 @@ export default function Page() {
                     placeholder="What is on your mind?"
                   />
                 </div>
-
                 <div className="form-group">
                   <label>Estimated Time</label>
-
                   <div className="time-grid">
                     {[5, 10, 15, 30, 45, 60, 120, 240].map((time) => (
                       <button
@@ -121,18 +111,6 @@ export default function Page() {
                     ))}
                   </div>
                 </div>
-
-                <div className="form-group">
-                  <label>Notes</label>
-
-                  <textarea
-                    rows={5}
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Anything you don't want to forget..."
-                  />
-                </div>
-
                 <button className="save-btn" onClick={createTask}>
                   Save Task
                 </button>
@@ -140,7 +118,6 @@ export default function Page() {
             </ModalMenu>
           </Modal>
         </div>
-
         <div className="task-list">
           {taskino.map((task) => (
             <div
@@ -156,18 +133,14 @@ export default function Page() {
 
                 <div>
                   <h4>{task.title}</h4>
-
                   <span>
                     ⏱{" "}
                     {task.estimatedTime >= 60
                       ? `${task.estimatedTime / 60}h`
                       : `${task.estimatedTime}m`}
                   </span>
-
-                  {task.notes && <p className="notes">{task.notes}</p>}
                 </div>
               </div>
-
               <div className="actions">
                 <button onClick={() => deleteTask(task._id)}>🗑</button>
               </div>
