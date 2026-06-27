@@ -174,7 +174,7 @@
   .check-box
   .roundedCheck {
   display: none;
-  fill: var(--card);
+  fill: #fff;
   flex-shrink: 0;
 }
 .calendar-day
