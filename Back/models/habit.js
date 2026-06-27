@@ -29,9 +29,10 @@ const habitSchema = new mongoose.Schema({
     default: "not-done",
   },
   startDate: { type: [Date], default: [] },
-  customDate: { type: Date, default: null }, // ✅ جدید برای عادت در تاریخ خاص
+  customDate: { type: Date, default: null },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 const Habit = mongoose.model("Habit", habitSchema);
+
 module.exports = Habit;

@@ -3,6 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+const cron = require("node-cron");
+const { analyzeAndCommand } = require("./services/oscarService");
+const oscarRoutes = require("./routes/oscarRoutes");
 
 const app = express();
 app.use(express.json());
@@ -11,10 +14,10 @@ app.use(
   cors({
     credentials: true,
     origin: process.env.FRONT_PORT,
-  })
+  }),
 );
 
-const mongoUri = process.env.MONGO_LOCAL; 
+const mongoUri = process.env.MONGO_LOCAL;
 
 mongoose
   .connect(mongoUri)
@@ -32,17 +35,22 @@ app.use("/banks", require("./routes/banks"));
 app.use("/habits", require("./routes/habits"));
 app.use("/moneys", require("./routes/moneys"));
 app.use("/events", require("./routes/events"));
-// app.use("/messages", require("./routes/messages"));
 app.use("/products", require("./routes/product"));
 app.use("/timer", require("./routes/timer"));
 app.use("/transactions", require("./routes/transactions"));
-
+app.use("/taskino", require("./routes/taskino"));
 
 const uploadRoute = require("./routes/upload");
 app.use("/api/upload", uploadRoute);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/user", require("./routes/user"));
 
+cron.schedule("* * * * *", () => {
+  analyzeAndCommand();
+});
+
+app.use("/api/oscar", oscarRoutes);
+
 app.listen(process.env.BACK_PORT, () =>
-  console.log(`Server running on http://localhost:${process.env.BACK_PORT}`)
+  console.log(`Server running on http://localhost:${process.env.BACK_PORT}`),
 );

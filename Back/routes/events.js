@@ -8,9 +8,4 @@ router.use(authMiddleware);
 router.get("/", getEvents);
 router.put("/:id", updateEvent);
 
-
-
-
-
-
 module.exports = router;

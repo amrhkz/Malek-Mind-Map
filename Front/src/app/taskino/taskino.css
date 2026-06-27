@@ -1,0 +1,291 @@
+.taskino {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.taskino-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.taskino-header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.taskino-header p {
+    color: #8d8d8d;
+    font-size: 15px;
+}
+
+.new-task-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 14px;
+    padding: 14px 22px;
+    background: #4f46e5;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.new-task-btn:hover {
+    background: #4338ca;
+}
+
+/* ===========================
+   Toolbar
+=========================== */
+
+.taskino-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.taskino-toolbar input {
+    flex: 1;
+    min-width: 280px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid #2a2a2a;
+    background: #171717;
+    color: white;
+    padding: 0 18px;
+    outline: none;
+    font-size: 15px;
+}
+
+.taskino-toolbar input:focus {
+    border-color: #4f46e5;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filters button {
+    border: 1px solid #2f2f2f;
+    background: #171717;
+    color: white;
+    border-radius: 999px;
+    padding: 11px 18px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.filters button:hover {
+    border-color: #4f46e5;
+}
+
+.filters .active {
+    background: #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* ===========================
+   Tasks
+=========================== */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #181818;
+    border: 1px solid #282828;
+    border-radius: 18px;
+    padding: 20px;
+    transition: .25s;
+}
+
+.task-card:hover {
+    border-color: #4f46e5;
+    transform: translateY(-2px);
+}
+
+.task-card .left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.task-card input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.task-card h4 {
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: white;
+}
+
+.task-card span {
+    color: #8b8b8b;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.actions button {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: #242424;
+    color: white;
+    transition: .25s;
+}
+
+.actions button:hover {
+    background: #333;
+}
+
+.completed h4 {
+    text-decoration: line-through;
+    opacity: .45;
+}
+
+.completed span {
+    opacity: .35;
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.task-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.task-modal h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: #9d9d9d;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #2d2d2d;
+    background: #171717;
+    color: white;
+    border-radius: 14px;
+    padding: 14px 16px;
+    outline: none;
+    resize: none;
+    transition: .25s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #4f46e5;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.time-grid button {
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #2f2f2f;
+    background: #1b1b1b;
+    color: white;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.time-grid button:hover {
+    background: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.save-btn {
+    height: 56px;
+    border: none;
+    border-radius: 14px;
+    background: #4f46e5;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.save-btn:hover {
+    background: #4338ca;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:768px) {
+
+    .taskino-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .taskino-toolbar {
+        flex-direction: column;
+    }
+
+    .task-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
