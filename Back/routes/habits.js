@@ -4,14 +4,10 @@ const {
   updateHabit,
   createHabit,
   deleteHabit,
-<<<<<<< HEAD
   getTestSort,
   tickHabit,
-} = require("../controllers/habitController");
-=======
   toggleHabitDate,
-} = require("../controllers/habbitController");
->>>>>>> 3a6bb7e2eeeeee0b464fccf2ff2e60926a65c84c
+} = require("../controllers/habitController");
 const authMiddleware = require("../middlewares/auth");
 const router = express.Router();
 
@@ -25,11 +21,4 @@ router.delete("/:id", deleteHabit);
 router.get("/test-sorted", getTestSort);
 router.post("/:id/tick", tickHabit);
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 3a6bb7e2eeeeee0b464fccf2ff2e60926a65c84c
 module.exports = router;
