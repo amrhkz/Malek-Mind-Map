@@ -53,6 +53,7 @@ function HabitTab() {
                     slug: e.target.title.value
                       .toLowerCase()
                       .replace(/\s+/g, "-"),
+                    order: Number(e.target.order.value),
                     repeat: repeatType,
                     count: Number(e.target.count.value),
                     target: Number(e.target.target.value),
@@ -87,6 +88,14 @@ function HabitTab() {
               >
                 <div className="title">Create New Habit</div>
                 <input type="text" name="title" placeholder="Title" required />
+                <input
+                  type="number"
+                  name="order"
+                  placeholder="Order"
+                  min="0"
+                  defaultValue={habits.length}
+                  required
+                />
                 <select
                   name="repeat"
                   required
@@ -194,6 +203,7 @@ function HabitTab() {
                           title: e.target.title.value,
                           repeat: e.target.repeat.value,
                           count: e.target.count.value,
+                          order: Number(e.target.order.value),
                         };
                         try {
                           const res = await fetch(
@@ -227,6 +237,13 @@ function HabitTab() {
                         name="title"
                         defaultValue={habit.title}
                         placeholder="Title"
+                      />
+                      <input
+                        type="number"
+                        name="order"
+                        min="0"
+                        defaultValue={habit.order ?? 0}
+                        placeholder="Order"
                       />
                       <select name="repeat" defaultValue={habit.repeat}>
                         <option value="daily">Daily</option>

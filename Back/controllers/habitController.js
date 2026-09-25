@@ -2,7 +2,7 @@ const Habit = require("../models/habit");
 
 exports.getHabits = async (req, res) => {
   try {
-    const habits = await Habit.find({ user: req.user.id });
+    const habits = await Habit.find({ user: req.user.id }).sort({ order: 1, _id: 1 });
     res.json(habits);
   } catch (err) {
     res.status(500).json({ error: "Failed to get Habits" });
@@ -14,6 +14,7 @@ exports.createHabit = async (req, res) => {
     const {
       title,
       slug,
+      order,
       repeat,
       count,
       target,
@@ -24,6 +25,7 @@ exports.createHabit = async (req, res) => {
     const newHabit = new Habit({
       title,
       slug,
+      order,
       repeat,
       count,
       target,
@@ -46,6 +48,7 @@ exports.updateHabit = async (req, res) => {
     const {
       title,
       slug,
+      order,
       repeat,
       count,
       target,
@@ -63,6 +66,7 @@ exports.updateHabit = async (req, res) => {
     // فقط فیلدهایی که ارسال شدن رو به‌روزرسانی کن
     if (title !== undefined) habit.title = title;
     if (slug !== undefined) habit.slug = slug;
+    if (order !== undefined) habit.order = order;
     if (repeat !== undefined) habit.repeat = repeat;
     if (count !== undefined) habit.count = count;
     if (target !== undefined) habit.target = target;

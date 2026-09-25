@@ -56,6 +56,11 @@ const HabitList = ({ habits, day, onHabitUpdate }) => {
       default:
         return false;
     }
+  }).sort((firstHabit, secondHabit) => {
+    const firstOrder = firstHabit.order ?? 0;
+    const secondOrder = secondHabit.order ?? 0;
+
+    return firstOrder - secondOrder;
   });
 
   const handleToggleHabit = async (habit, index) => {

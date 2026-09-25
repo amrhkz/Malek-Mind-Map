@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const habitSchema = new mongoose.Schema({
   title: { type: String, required: true, unique: true },
   slug: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 },
   repeat: { type: String, required: true }, // "daily", "week-days", "specific-days"
   specificDays: { type: [Number], default: [] },
   dates: { type: [Date], default: [] },
